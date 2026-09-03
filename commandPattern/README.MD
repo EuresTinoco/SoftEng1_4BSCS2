@@ -17,15 +17,12 @@ Your challenge is to apply a design pattern that allows this remote control to b
 
 ## Components
 
-ViewerApp (Client): This represents an application used by viewers to control the TV. It interacts with the RemoteControl to send commands.
+* ViewerApp (Client): Represents the main application interface where the user makes decisions on which devices to control. It interacts with the RemoteControl to invoke commands dynamically.
 
-RemoteControl (Invoker): The RemoteControl acts as an invoker, receiving commands from the ViewerApp and executing them. It has a clickButton() method to invoke commands.
+* RemoteControl / Hub (Invoker):** Acts as the central invoker, receiving command requests and triggering them via the clickButton() method without needing internal knowledge of the targeted device.
 
-Command (Interface): An interface defining the execute() method, which concrete command objects must implement. It ensures that all concrete commands have an execute() method.
+* Command (Interface): Defines the common execution contract with the execute() method that all concrete commands implement.
 
-PowerOn (Concrete Command): A concrete command object representing the "power on" operation for the TV. It encapsulates the switchOn() method of the Tv object.
+* Concrete Commands: Objects such as PowerOn, PowerOff, TurnLightOn, IncreaseTemperature, PlayMusic, and DecreaseVolume that encapsulate a specific request and bind it to a receiver's action.
 
-PowerOff (Concrete Command): A concrete command object representing the "power off" operation for the TV. It encapsulates the switchOff() method of the Tv object.
-
-Tv (Receiver): The TV object represents the device being controlled. It has switchOn() and switchOff() methods to control its power state.
-
+* Receivers (Devices): Smart home devices such as Tv, Light, Thermostat, and MusicPlayer that contain the actual device-specific logic for performing operations.
